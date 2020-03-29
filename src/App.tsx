@@ -3,11 +3,11 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 
 //Importando componentes básicos
-import {Login}  from './components/Login/LoginIndex'
+import { Login }  from './Pages/Login/LoginIndex'
 import { NavBar } from './components/NavBar/NavBar';
-import { Home } from './components/Home/Home'
-import { UserRegisterForm } from './components/UserRegisterForm/UserRegisterForm'
-import { NotFound } from './Pages/404NotFound'
+import { Home } from './Pages/Home/Home'
+import { UserRegisterForm } from './Pages/UserRegisterForm/UserRegisterForm'
+import { NotFound } from './Pages/sharedPages/NotFound/404NotFound'
 
 const App = () => {
   return (
@@ -15,8 +15,8 @@ const App = () => {
       <NavBar></NavBar>
       <BrowserRouter>
           <Switch>
-            <Route path="/Login" component={Login} />
-            <Route path="/Home" component={Home} />
+            <Route exact path="/Login" component={Login} />
+            <Route exact path="/Home" component={Home} />
             <Route exact path="/NewUser" component={UserRegisterForm} />
             <Route component={NotFound} />
           </Switch>

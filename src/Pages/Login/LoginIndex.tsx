@@ -62,29 +62,32 @@ export const Login = (props : any) =>{
   //We define the styles to use on the UI interface
   const classes = useStyles();
   return (
-    <MUI.Container className={classes.root}>
-      <Grid container spacing={1}>
-        <Grid container direction="row-reverse"  justify="center"  alignItems="center" item xs={12}>
-          <MUI.Typography variant="h4" component="h2">
-              Login
-          </MUI.Typography>
+    <React.Fragment>
+      <br />
+      <MUI.Container className={classes.root}>
+        <Grid container spacing={1}>
+          <Grid container direction="row-reverse"  justify="center"  alignItems="center" item xs={12}>
+            <MUI.Typography variant="h4" component="h2">
+                Login
+            </MUI.Typography>
+          </Grid>
+          <Grid container direction="row-reverse"  justify="center"  alignItems="center" item xs={12}>
+            <MUI.TextField name="username" id="txtUsername" label="Type your username" onChange={handleOnInputChange} />
+          </Grid>
+          <Grid container direction="row-reverse"  justify="center"  alignItems="center" item xs={12}>
+            <MUI.TextField name="password" id="txtPassword" type="password" label="Type your password" onChange={handleOnInputChange} />
+          </Grid>
+          <Grid container direction="row-reverse"  justify="center"  alignItems="center" item xs={12}>
+              <MUI.Button onClick={handleOnFormSubmit} variant="contained" color="primary">Login</MUI.Button>
+          </Grid>
+          <hr/>
+          <Grid container direction="row-reverse"  justify="center"  alignItems="center" item xs={12}>
+            <MUI.Typography variant="h6" component="h2">
+              <Link to="/NewUser" >not registered yet? Signup now</Link>
+            </MUI.Typography>
+          </Grid>
         </Grid>
-        <Grid container direction="row-reverse"  justify="center"  alignItems="center" item xs={12}>
-          <MUI.TextField name="username" id="txtUsername" label="Type your username" onChange={handleOnInputChange} />
-        </Grid>
-        <Grid container direction="row-reverse"  justify="center"  alignItems="center" item xs={12}>
-          <MUI.TextField name="password" id="txtPassword" type="password" label="Type your password" onChange={handleOnInputChange} />
-        </Grid>
-        <Grid container direction="row-reverse"  justify="center"  alignItems="center" item xs={12}>
-            <MUI.Button onClick={handleOnFormSubmit} variant="contained" color="primary">Login</MUI.Button>
-        </Grid>
-        <hr/>
-        <Grid container direction="row-reverse"  justify="center"  alignItems="center" item xs={12}>
-          <MUI.Typography variant="h6" component="h2">
-            <Link to="/NewUser" >not registered yet? Signup now</Link>
-          </MUI.Typography>
-        </Grid>
-      </Grid>
-    </MUI.Container>
+      </MUI.Container>
+    </React.Fragment>
   );
 }
