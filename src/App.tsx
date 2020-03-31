@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 
 
 //Importando componentes básicos
-import { Login }  from './Pages/Login/LoginIndex'
+import  Login   from './Pages/Login/LoginIndex'
 import { NavBar } from './components/NavBar/NavBar';
 import { Home } from './Pages/Home/Home'
 import { UserRegisterForm } from './Pages/UserRegisterForm/UserRegisterForm'

@@ -7,7 +7,7 @@ import * as MUI from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 
 //Importamos los componenetes necesarios
-import {Login} from '../../Pages/Login/LoginIndex'
+import Login from '../../Pages/Login/LoginIndex'
 
 export function UserRegisterForm (){
     return (

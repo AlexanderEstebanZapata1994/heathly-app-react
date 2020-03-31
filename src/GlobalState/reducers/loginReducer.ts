@@ -1,5 +1,6 @@
 import { ActionTypes } from '../Actions/actionTypes';
-import axios from "axios";
+import { loginAction, logoutAction } from '../Actions'
+
 
 export type credentialsType = {
     username : string,
@@ -9,7 +10,7 @@ export type credentialsType = {
     isLoggedIn : boolean
 };
 
-const initialState:credentialsType = {
+const initialState : credentialsType = {
     username : "",
     password : "",
     token : "",
@@ -17,40 +18,10 @@ const initialState:credentialsType = {
     isLoggedIn : false,
 }
 
-export type loginAction = {
-    type : string,
-    payload : credentialsType
-}
-
-const loginReducer = (state: credentialsType = initialState, action : loginAction)  =>{
+const loginReducer = (state: credentialsType = initialState, action : loginAction | logoutAction)  =>{
     switch (action.type) {
         case ActionTypes.LOGIN:
-        {   
-            let result : credentialsType;
-            
-            console.log(action)
-            axios.post("https://localhost:44380/api/users", {
-                username: action.payload.username,
-                password: action.payload.password
-            }).then((res) => {
-                console.log(res);
-                return result = {
-                    username: action.payload.username,
-                    password: action.payload.password,
-                    token: res.data.token,
-                    userId: res.data.userId,
-                    isLoggedIn : true
-                }
-                // return Object.assign(state, {
-                //     username: action.payload.username,
-                //     password: action.payload.password,
-                //     token: res.data.token,
-                //     userId: res.data.userId,
-                //     isLoggedIn : true
-                // })
-            });
-            break;
-        }
+            return Object.assign(state, action.payload)
         case ActionTypes.LOGOUT:
         {
             return Object.assign(state, {

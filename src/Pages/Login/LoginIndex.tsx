@@ -1,13 +1,26 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {Link} from "react-router-dom";
-import { useSelector, useDispatch } from 'react-redux';
-import { LoginAction, LogoutAction } from '../../GlobalState/Actions'
+
 
 //Importamos componentes de material UI 
 import * as MUI from '@material-ui/core';
 import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 
+
+
+//We import the materials to work with Redux
+import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
+import { loginAction, myLogin, credentialsType, params} from '../../GlobalState/Actions'
+
+
+
+
+// ------------------------------------------------------------------
+// ------------------------------------------------------------------
+// ------------------------------------------------------------------
+// ------------------------------------------------------------------
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -16,22 +29,11 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-//Tipeados de variables
-type UserCredentials = {
-  username : string,
-  password : string,
-  token : string,
-  userId : number,
-  isLoggedIn : boolean
-};
-
-export const Login = (props : any) =>{
+//Login Component
+const Login = (props : any) =>{
   const [username, setUsername] = useState<string | null>(null)
   const [password, setPassword] = useState<string | null>(null)
-  const [userCredentials, setUserCredentials] = useState<UserCredentials | null> (null)
-  
-  const dispatch = useDispatch();
-  
+    
   const handleOnInputChange = (event : React.ChangeEvent<HTMLInputElement>) => {
       console.log(event);
       const { name }= event.target;
@@ -44,22 +46,9 @@ export const Login = (props : any) =>{
   }
 
   const handleOnFormSubmit =  (event : React.MouseEvent<HTMLButtonElement>) =>{
-    dispatch(LoginAction({username, password}));
-    // LoginApiService(username, password).then((response) =>{
-    //     const data = response.data;
-    //     setUser(data);
-    // })
-    // .catch(()=>{
-    //     alert(`the user and password don't match`);
-    // });
+    Login( {username, password} );
     event.preventDefault();
   } 
-
-  useEffect(() => {
-    // if(user){
-    //   props.history.push('/Home');
-    // }
-  })
   
   //We define the styles to use on the UI interface
   const classes = useStyles();
@@ -91,3 +80,15 @@ export const Login = (props : any) =>{
     </React.Fragment>
   );
 }
+
+const mapStateToProps = (state : credentialsType) => {
+  return {credentials : state}
+}
+
+const mapDispatchToProps = (dispatch : Dispatch) =>{
+  return {
+    login : (credentials : params) => dispatch<loginAction>(myLogin(credentials) as any)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
