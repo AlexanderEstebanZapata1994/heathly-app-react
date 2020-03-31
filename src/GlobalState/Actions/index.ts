@@ -27,7 +27,9 @@ export type logoutAction = {
 }
 
 export const myLogin = (credentials : params) => {
+    console.log("llegue?")
     let result : credentialsType;
+    
     return async (dispatch: Dispatch) =>{
         axios.post("https://localhost:44380/api/users", {
                 username: credentials.username,

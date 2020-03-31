@@ -30,9 +30,9 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 //Login Component
-const Login = (props : any) =>{
-  const [username, setUsername] = useState<string | null>(null)
-  const [password, setPassword] = useState<string | null>(null)
+const Login = () =>{
+  const [username, setUsername] = useState<string>("")
+  const [password, setPassword] = useState<string>("")
     
   const handleOnInputChange = (event : React.ChangeEvent<HTMLInputElement>) => {
       console.log(event);
@@ -46,7 +46,8 @@ const Login = (props : any) =>{
   }
 
   const handleOnFormSubmit =  (event : React.MouseEvent<HTMLButtonElement>) =>{
-    Login( {username, password} );
+    console.log("entre")
+    myLogin( {username, password} );
     event.preventDefault();
   } 
   
