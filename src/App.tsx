@@ -10,11 +10,9 @@ import { UserRegisterForm } from './Pages/UserRegisterForm/UserRegisterForm'
 import { NotFound } from './Pages/sharedPages/NotFound/404NotFound'
 
 //REDUX
-import { createStore } from 'redux'
 import { Provider } from 'react-redux'
-import combinedReducers  from './GlobalState/reducers/index'
+import store  from './GlobalState/store/store'
 
-let store = createStore(combinedReducers, (window as any).__REDUX_DEVTOOLS_EXTENSION__ && (window as any).__REDUX_DEVTOOLS_EXTENSION__());
 
 const App = () => {
   return (

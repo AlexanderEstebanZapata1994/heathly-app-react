@@ -31,10 +31,13 @@ export const myLogin = (credentials : params) => {
     let result : credentialsType;
     
     return async (dispatch: Dispatch) =>{
-        axios.post("https://localhost:44380/api/users", {
+        await axios.post("https://localhost:44380/api/users", {
                 username: credentials.username,
                 password: credentials.password
             }).then((res) => {
+                console.log("consultando")
+                console.log(res)
+                console.log(credentials)
                 result = {
                     username: credentials.username,
                     password: credentials.password,
@@ -42,10 +45,13 @@ export const myLogin = (credentials : params) => {
                     userId: res.data.userId,
                     isLoggedIn : true
                 }
-            });
-            dispatch({
-                type: ActionTypes.LOGIN,
-                payload: result
+                dispatch({
+                    type: ActionTypes.LOGIN,
+                    payload: result
+                })
             })
+            .catch((error)=>{
+                console.log(error)
+            });
     }
 }

@@ -29,8 +29,13 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+export type LoginProps = {
+  login: (credentials: params) => void
+}
+
 //Login Component
-const Login = () =>{
+const Login = (props : LoginProps) =>{
+  console.log(props)
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
     
@@ -47,7 +52,7 @@ const Login = () =>{
 
   const handleOnFormSubmit =  (event : React.MouseEvent<HTMLButtonElement>) =>{
     console.log("entre")
-    myLogin( {username, password} );
+    props.login( {username, password} );
     event.preventDefault();
   } 
   
