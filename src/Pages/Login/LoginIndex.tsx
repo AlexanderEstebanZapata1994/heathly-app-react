@@ -1,27 +1,25 @@
 import React, {useState} from 'react';
 import {Link} from "react-router-dom";
+import { NavBar } from '../../components/NavBar';
 
 
 //Importamos componentes de material UI 
 import * as MUI from '@material-ui/core';
-import { makeStyles, createStyles, Theme } from '@material-ui/core/styles';
+import { makeStyles, createStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-
-
 
 //We import the materials to work with Redux
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { loginAction, myLogin, credentialsType, params} from '../../GlobalState/Actions'
-
-
-
+import { loginAction, myLogin} from '../../GlobalState/Actions'
+import { params, RootState } from '../../Model/Models'
+ 
 
 // ------------------------------------------------------------------
 // ------------------------------------------------------------------
 // ------------------------------------------------------------------
 // ------------------------------------------------------------------
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       flexGrow: 1,
@@ -29,18 +27,17 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
-export type LoginProps = {
-  login: (credentials: params) => void
+export interface ILoginProps {
+  login: (credentials: params) => void,
+  loginState : RootState
 }
 
 //Login Component
-const Login = (props : LoginProps) =>{
-  console.log(props)
+const Login = (props : ILoginProps) =>{
   const [username, setUsername] = useState<string>("")
   const [password, setPassword] = useState<string>("")
     
   const handleOnInputChange = (event : React.ChangeEvent<HTMLInputElement>) => {
-      console.log(event);
       const { name }= event.target;
 
       if (name === 'username')
@@ -51,8 +48,15 @@ const Login = (props : LoginProps) =>{
   }
 
   const handleOnFormSubmit =  (event : React.MouseEvent<HTMLButtonElement>) =>{
-    console.log("entre")
     props.login( {username, password} );
+    console.log("volví")
+    console.log(props)
+    // const {hasError, errorMessage } = props.loginState.loginReducer.error
+    // console.log("error")
+    // console.log(hasError)
+    // if(hasError)
+    //   alert(errorMessage)
+
     event.preventDefault();
   } 
   
@@ -60,13 +64,9 @@ const Login = (props : LoginProps) =>{
   const classes = useStyles();
   return (
     <React.Fragment>
+      <NavBar title={"Login"}></NavBar>
       <MUI.Container className={classes.root}>
         <Grid container spacing={1}>
-          <Grid container direction="row-reverse"  justify="center"  alignItems="center" item xs={12}>
-            <MUI.Typography variant="h4" component="h2">
-                Login
-            </MUI.Typography>
-          </Grid>
           <Grid container direction="row-reverse"  justify="center"  alignItems="center" item xs={12}>
             <MUI.TextField name="username" id="txtUsername" label="Type your username" onChange={handleOnInputChange} />
           </Grid>
@@ -78,7 +78,7 @@ const Login = (props : LoginProps) =>{
           </Grid>
           <Grid container direction="row-reverse"  justify="center"  alignItems="center" item xs={12}>
             <MUI.Typography variant="h6" component="h2">
-              <Link to="/NewUser" >not registered yet? Signup now</Link>
+              <Link to="/newUser" >not registered yet? Signup now</Link>
             </MUI.Typography>
           </Grid>
         </Grid>
@@ -86,15 +86,17 @@ const Login = (props : LoginProps) =>{
     </React.Fragment>
   );
 }
-
-const mapStateToProps = (state : credentialsType) => {
-  return {credentials : state}
+//Esto es para obtener la porción del state que el compoenente necesita
+const mapStateToProps = (loginState : RootState) => {
+  return { loginData : loginState.credentialsType}
 }
 
+//Relacionamos la acción con las props
 const mapDispatchToProps = (dispatch : Dispatch) =>{
   return {
     login : (credentials : params) => dispatch<loginAction>(myLogin(credentials) as any)
   }
 }
 
+//Utilizamos el HOC connect con el componente Login
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

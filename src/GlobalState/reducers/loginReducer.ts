@@ -1,37 +1,39 @@
 import { ActionTypes } from '../Actions/actionTypes';
-import { loginAction, logoutAction } from '../Actions'
+import { loginAction, logoutAction, loginErrorAction } from '../Actions'
+import { RootState } from '../../Model/Models'
 
-
-export type credentialsType = {
-    username : string,
-    password : string,
-    token : string,
-    userId : number,
-    isLoggedIn : boolean
-};
-
-const initialState : credentialsType = {
-    username : "",
-    password : "",
-    token : "",
-    userId : 0,
-    isLoggedIn : false,
+//Initialize the object
+const initialState : RootState  = {
+    credentialsType : {
+        username : "",
+        password : "",
+        token : "",
+        userId : 0,
+        isLoggedIn : false,
+        error : {hasError : false, errorMessage : ""}
+    }
 }
 
-const loginReducer = (state: credentialsType = initialState, action : loginAction | logoutAction)  =>{
+const loginReducer = (state: RootState = initialState, action : loginAction | logoutAction | loginErrorAction)  => {
     switch (action.type) {
+
         case ActionTypes.LOGIN:
             return Object.assign(state, action.payload)
-        case ActionTypes.LOGOUT:
-        {
+
+        case ActionTypes.LOGIN_ERROR:
             return Object.assign(state, {
-                    username: "",
-                    password: "",
-                    token: "",
-                    userId: 0,
-                    isLoggedIn : false
+                    error : {hasError : true, errorMessage : action.payload}
             });
-        }
+
+        case ActionTypes.LOGOUT:
+            return Object.assign(state, {
+                username: "",
+                password: "",
+                token: "",
+                userId: 0,
+                isLoggedIn : false
+            });
+
         default:
             return state;
     }

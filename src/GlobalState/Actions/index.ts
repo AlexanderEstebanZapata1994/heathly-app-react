@@ -1,57 +1,55 @@
 import { ActionTypes } from './actionTypes'
-import axios from "axios";
 import { Dispatch } from 'redux';
+import { history } from '../../App'
+import axios from "axios";
+import {params, RootState } from '../../Model/Models'
 
-
-// //Creamos los tipos de datos para acciones y tipos de datos
-export type params = {
-    username : string,
-    password : string
-}
-
-export type credentialsType = {
-    username : string,
-    password : string,
-    token : string,
-    userId : number,
-    isLoggedIn : boolean
-};
 
 export type loginAction = {
     type : ActionTypes.LOGIN,
-    payload : credentialsType
+    payload : RootState
 }
 
-export type logoutAction = {
-    type : ActionTypes.LOGOUT
+export type loginErrorAction = {
+    type : ActionTypes.LOGIN_ERROR,
+    payload : string
 }
 
 export const myLogin = (credentials : params) => {
-    console.log("llegue?")
-    let result : credentialsType;
-    
-    return async (dispatch: Dispatch) =>{
-        await axios.post("https://localhost:44380/api/users", {
+    let result : RootState;
+    return  (dispatch: Dispatch) =>{
+           axios.post("https://localhost:44380/api/users", {
                 username: credentials.username,
                 password: credentials.password
             }).then((res) => {
-                console.log("consultando")
-                console.log(res)
-                console.log(credentials)
                 result = {
-                    username: credentials.username,
-                    password: credentials.password,
-                    token: res.data.token,
-                    userId: res.data.userId,
-                    isLoggedIn : true
+                    credentialsType :{
+                        username: credentials.username,
+                        password: credentials.password,
+                        token: res.data.Token,
+                        userId: res.data.UserId,
+                        isLoggedIn : true,
+                        error:{hasError : false, errorMessage : ""}
+                    }
                 }
+                console.log(result)
                 dispatch({
                     type: ActionTypes.LOGIN,
                     payload: result
-                })
-            })
-            .catch((error)=>{
+                });
+                history.push('/Home');
+
+            }).catch((error)=>{
                 console.log(error)
+                dispatch({
+                    type: ActionTypes.LOGIN_ERROR,
+                    payload: "Ha ocurrido un error."
+                })
             });
     }
+}
+
+
+export type logoutAction = {
+    type : ActionTypes.LOGOUT
 }
