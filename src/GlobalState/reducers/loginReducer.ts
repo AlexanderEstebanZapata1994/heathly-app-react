@@ -1,6 +1,6 @@
 import { ActionTypes } from '../Actions/actionTypes';
-import { loginAction, logoutAction, loginErrorAction } from '../Actions'
-import { RootState } from '../../Model/Models'
+import { LoginAction, LoginErrorAction } from '../Actions'
+import { RootState } from '../../Model/LoginModel'
 
 //Initialize the object
 const initialState : RootState  = {
@@ -14,7 +14,7 @@ const initialState : RootState  = {
     }
 }
 
-const loginReducer = (state: RootState = initialState, action : loginAction | logoutAction | loginErrorAction)  => {
+const loginReducer = (state: RootState = initialState, action : LoginAction | LoginErrorAction)  => {
     switch (action.type) {
 
         case ActionTypes.LOGIN:
@@ -24,16 +24,6 @@ const loginReducer = (state: RootState = initialState, action : loginAction | lo
             return Object.assign(state, {
                     error : {hasError : true, errorMessage : action.payload}
             });
-
-        case ActionTypes.LOGOUT:
-            return Object.assign(state, {
-                username: "",
-                password: "",
-                token: "",
-                userId: 0,
-                isLoggedIn : false
-            });
-
         default:
             return state;
     }

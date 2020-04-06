@@ -1,11 +1,8 @@
-//Login models
-
 // //Creamos los tipos de datos para acciones y tipos de datos
 export type params = {
     username : string,
     password : string
 }
-
 export type RootState = {
     credentialsType : credentialsType
 }
@@ -21,4 +18,3 @@ export type credentialsType = {
     isLoggedIn : boolean,
     error : errorType
 };
-

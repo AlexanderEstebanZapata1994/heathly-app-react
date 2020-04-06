@@ -11,8 +11,8 @@ import Grid from '@material-ui/core/Grid';
 //We import the materials to work with Redux
 import { connect } from 'react-redux';
 import { Dispatch } from 'redux';
-import { loginAction, myLogin} from '../../GlobalState/Actions'
-import { params, RootState } from '../../Model/Models'
+import { LoginAction, myLogin} from '../../GlobalState/Actions'
+import { params, RootState } from '../../Model/LoginModel'
  
 
 // ------------------------------------------------------------------
@@ -49,13 +49,14 @@ const Login = (props : ILoginProps) =>{
 
   const handleOnFormSubmit =  (event : React.MouseEvent<HTMLButtonElement>) =>{
     props.login( {username, password} );
-    console.log("volví")
     console.log(props)
-    // const {hasError, errorMessage } = props.loginState.loginReducer.error
-    // console.log("error")
-    // console.log(hasError)
-    // if(hasError)
-    //   alert(errorMessage)
+    debugger;
+    const {hasError, errorMessage } = props.loginState?.credentialsType.error
+
+    if(hasError)
+      alert(errorMessage)
+    else
+      alert("redireciconar")
 
     event.preventDefault();
   } 
@@ -94,7 +95,7 @@ const mapStateToProps = (loginState : RootState) => {
 //Relacionamos la acción con las props
 const mapDispatchToProps = (dispatch : Dispatch) =>{
   return {
-    login : (credentials : params) => dispatch<loginAction>(myLogin(credentials) as any)
+    login : (credentials : params) => dispatch<LoginAction>(myLogin(credentials) as any)
   }
 }
 
