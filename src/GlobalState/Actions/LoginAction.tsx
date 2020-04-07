@@ -22,7 +22,7 @@ export const myLogin = (credentials : params) => {
                 password: credentials.password
             }).then((res) => {
                 result = {
-                    credentialsType :{
+                    credentials :{
                         username: credentials.username,
                         password: credentials.password,
                         token: res.data.Token,
@@ -31,7 +31,7 @@ export const myLogin = (credentials : params) => {
                         error:{hasError : false, errorMessage : ""}
                     }
                 }
-                console.log(result)
+
                 dispatch({
                     type: ActionTypes.LOGIN,
                     payload: result

@@ -4,7 +4,7 @@ export type params = {
     password : string
 }
 export type RootState = {
-    credentialsType : credentialsType
+    credentials : credentialsType
 }
 type errorType = {
     hasError : boolean,
