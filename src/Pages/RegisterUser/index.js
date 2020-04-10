@@ -1,0 +1,1 @@
+export {UserRegisterFormContainer}  from './UserRegisterFormContainer' 

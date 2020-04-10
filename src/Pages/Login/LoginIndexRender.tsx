@@ -30,7 +30,7 @@ export const LoginIndexRender = ({handleOnInputChange, handleOnFormSubmit} : IPr
                     </Grid>
                     <Grid container direction="row-reverse"  justify="center"  alignItems="center" item xs={12}>
                         <Typography variant="h6" component="h2">
-                            <Link to="/newUser" >not registered yet? Signup now</Link>
+                            <Link to="/register" >not registered yet? Signup now</Link>
                         </Typography>
                     </Grid>
                 </Grid>

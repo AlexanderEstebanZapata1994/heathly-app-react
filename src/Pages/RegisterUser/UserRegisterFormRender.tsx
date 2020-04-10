@@ -1,5 +1,6 @@
 import React,  {Fragment} from 'react';
-import {IData, IProps} from './UserRegisterTypes'
+import { Link } from 'react-router-dom'
+import { IProps } from './UserRegisterTypes'
 
 
 //Importamos componentes de material UI 
@@ -15,7 +16,7 @@ import {NavBar} from '../../components/NavBar'
 
 type handleOnChangeInputType = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void
 
-export const UserRegisterFormRender : React.FC<IProps> = (props) =>{
+export const UserRegisterFormRender = (props : IProps) =>{
     const {userForm, setUser, handleOnSubmit} : IProps = props
 
     const handleOnChangeInput : handleOnChangeInputType =  (event : React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>{ 
@@ -55,7 +56,7 @@ export const UserRegisterFormRender : React.FC<IProps> = (props) =>{
                   >Save information</Button>
                 </Grid>
                 <Grid item md={12} sm={6} xs={12}>
-                  <Button color="secondary" href="/Login">Back to Login form</Button>
+                  <Link to="/login"><Button color="secondary" >Cancel</Button></Link>
                 </Grid>
               </Grid>
           </div>

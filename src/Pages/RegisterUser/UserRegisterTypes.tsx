@@ -1,6 +1,9 @@
 export interface IData {
-    username:string,
-    password : string
+    user : {
+        username : string,
+        password : string
+    },
+    wasSubmitted : boolean
 }
 
 export interface IProps  {

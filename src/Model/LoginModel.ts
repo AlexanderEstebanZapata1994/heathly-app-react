@@ -1,20 +1,21 @@
 // //Creamos los tipos de datos para acciones y tipos de datos
-export type params = {
+export type Parameters = {
     username : string,
-    password : string
+    password : string,
+    submitted : boolean
 }
 export type RootState = {
-    credentials : credentialsType
+    User : UserData
 }
-type errorType = {
+type ErrorType = {
     hasError : boolean,
     errorMessage : string
 }
-export type credentialsType = {
+export type UserData = {
     username : string,
     password : string,
     token : string,
     userId : number,
     isLoggedIn : boolean,
-    error : errorType
+    error : ErrorType
 };
