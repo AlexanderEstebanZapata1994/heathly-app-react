@@ -1,20 +1,18 @@
 import { ActionTypes } from '../Actions/actionTypes';
 import { LoginAction, LoginErrorAction } from '../Actions'
-import { RootState } from '../../Model/LoginModel'
+import { User } from '../../Model/User.model'
 
 //Initialize the object
-const initialState : RootState  = {
-    credentialsType : {
-        username : "",
-        password : "",
-        token : "",
-        userId : 0,
-        isLoggedIn : false,
-        error : {hasError : false, errorMessage : ""}
-    }
+const initialState : User  = {
+    username : "",
+    password : "",
+    token : "",
+    userId : 0,
+    isLoggedIn : false,
+    error : {hasError : false, errorMessage : ""}
 }
 
-const loginReducer = (state: RootState = initialState, action : LoginAction | LoginErrorAction)  => {
+const loginReducer = (state: User = initialState, action : LoginAction | LoginErrorAction)  => {
     switch (action.type) {
 
         case ActionTypes.LOGIN:
