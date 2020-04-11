@@ -11,13 +11,13 @@ export type Parameters = {
 }
 
 type ErrorType = {
-    hasError : boolean,
-    errorMessage : string
+    HasError : boolean,
+    ErrorMessage : string
 }
 export type UserData = {
-    userId : number,
-    userName : string,
-    token : string,
-    isLoggedIn : boolean,
-    error : ErrorType
+    UserId : number,
+    UserName : string,
+    Token : string,
+    IsLoggedIn : boolean,
+    Error : ErrorType
 };

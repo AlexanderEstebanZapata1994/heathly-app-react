@@ -2,7 +2,7 @@ import { userConstants } from '../constants'
 import { userService } from '../../Services'
 import { messagesActions } from '.'
 import { history } from '../../helpers'
-import { Parameters, UserData } from '../../Model'
+import { Parameters, UserData, RegisterUserResponse } from '../../Model'
 import { Dispatch } from 'redux';
 
 export const userActions = {
@@ -13,16 +13,15 @@ export const userActions = {
 };
 
 function login(inputParams: Parameters) {
-  
-  console.log(inputParams)
+
   return (dispatch: Dispatch) => {
 
     dispatch(request(inputParams));
     userService.login(inputParams).then(
       user => {
-        if(user.error.hasError){
-          dispatch(failure(user.error.errorMessage));
-          dispatch(messagesActions.error(user.error.errorMessage));
+        if(user.Error.HasError){
+          dispatch(failure(user.Error.ErrorMessage));
+          dispatch(messagesActions.error(user.Error.ErrorMessage));
         }else{
           dispatch(success(user));
           history.push("/");
@@ -51,24 +50,24 @@ function register(user: Parameters) {
   return (dispatch: Dispatch) => {
     dispatch(request(user));
 
-    // userService.register(user).then(
-    //   user => {
-    //     dispatch(success(user));
-    //     history.push("/login");
-    //     dispatch(messagesActions.success("Registration successful"));
-    //   },
-    //   error => {
-    //     dispatch(failure(error));
-    //     dispatch(messagesActions.error(error));
-    //   }
-    // );
+    userService.register(user).then(
+      user => {
+        dispatch(success(user));
+        history.push("/login");
+        dispatch(messagesActions.success("Registration successful"));
+      },
+      error => {
+        dispatch(failure(error));
+        dispatch(messagesActions.error(error));
+      }
+    );
   };
 
-  function request(user: Parameters) {
-    return { type: userConstants.REGISTER_REQUEST, user };
+  function request(credentials: Parameters) {
+    return { type: userConstants.REGISTER_REQUEST, credentials };
   }
-  function success(user: Parameters) {
-    return { type: userConstants.REGISTER_SUCCESS, user };
+  function success(user: RegisterUserResponse) {
+    return { type: userConstants.REGISTER_SUCCESS, user  };
   }
   function failure(error: string) {
     return { type: userConstants.REGISTER_FAILURE, error };

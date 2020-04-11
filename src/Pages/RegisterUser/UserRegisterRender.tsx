@@ -1,7 +1,5 @@
 import React,  {Fragment} from 'react';
 import { Link } from 'react-router-dom'
-import { IProps } from '../../Model'
-
 
 //Importamos componentes de material UI 
 import Container from '@material-ui/core/Container';
@@ -14,16 +12,20 @@ import {useStyles} from './StyleUserRegisterForm'
 //Importamos los componenetes necesarios
 import {NavBar} from '../../components/NavBar'
 
-type handleOnChangeInputType = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void
+export const UserRegisterFormRender = (props : any) =>{
+    
+  const onChange = (event : React.ChangeEvent<HTMLInputElement>) => {
+    let name = event.target.name;
+    let value = event.target.value;
 
-export const UserRegisterFormRender = (props : IProps) =>{
-    const {userForm, setUser, handleOnSubmit} : IProps = props
+    props.handleOnInputChange({ [name]: value });
+  }
 
-    const handleOnChangeInput : handleOnChangeInputType =  (event : React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>{ 
-      const name = event.target.name
-      const value = event.target.value
-      setUser({...userForm, [name] : value})
-    }
+  const onSubmit = (event : React.MouseEvent<HTMLButtonElement>)=> {
+    event.preventDefault();
+    props.handleOnSubmit();
+    props.handleOnInputChange({submitted : true})
+  }
 
     const classes = useStyles();
     return (
@@ -38,11 +40,11 @@ export const UserRegisterFormRender = (props : IProps) =>{
               </Grid>
               <Grid container spacing={3}>
                 <Grid item md={12} sm={12} xs={12} >
-                  <Input placeholder="Username"  name="username" aria-describedby="usernameHelperText" onChange= {(e) => handleOnChangeInput(e)}/>
+                  <Input placeholder="Username"  name="userName" aria-describedby="usernameHelperText" onChange= {onChange}/>
                   <FormHelperText id="usernameHelperText">Type a unique username</FormHelperText>
                 </Grid>
                 <Grid item md={12} sm={12} xs={12}>
-                  <Input placeholder="Password" name="password" aria-describedby="usernameHelperText" type="password" onChange= {(e) => handleOnChangeInput(e)}/>
+                  <Input placeholder="Password" name="password" aria-describedby="usernameHelperText" type="password" onChange= {onChange}/>
                   <FormHelperText id="usernameHelperText">Type a secure password</FormHelperText>
                 </Grid>
                 <Grid item md={12} sm={6} xs={12}>
@@ -52,7 +54,7 @@ export const UserRegisterFormRender = (props : IProps) =>{
                     size="large"
                     className={classes.button}
                     startIcon={<SaveIcon />}
-                    onClick={handleOnSubmit}
+                    onClick={onSubmit}
                   >Save information</Button>
                 </Grid>
                 <Grid item md={12} sm={6} xs={12}>

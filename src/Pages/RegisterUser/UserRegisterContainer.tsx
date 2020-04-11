@@ -1,28 +1,44 @@
 import React, {useState} from 'react';
-import { connect } from 'react-redux'
+import { connect, ConnectedProps } from 'react-redux'
+import {userActions} from '../../GlobalState/Actions'
+import {ReduxRootState, Parameters, keyValueType, UserData} from '../../Model'
 
-
+//Importamos el componenete Dumb (Render)
 import {UserRegisterFormRender} from './UserRegisterRender'
-import {IData} from '../../Model'
+import { Dispatch } from 'redux';
 
 
-export const UserRegisterFormContainer = () => {
-    const [ userForm, setUser]  = useState<IData>({user :{username : "", password : ""}, wasSubmitted: false})
+type  RootState = ReduxRootState
 
-    const handleOnSubmit  = (event: React.MouseEvent) => {
-        console.log('Guardando');
-        console.log(userForm.user.username)
-        console.log(userForm.user.password)
-        console.log('Guardando');
-        event.preventDefault();
+const mapStateToProps = (state : RootState) => {
+    console.log(state)
+    return ({
+    userData : state.authentication.user
+})}
+
+const mapDispatchToProps = (dispatch : Dispatch) => {
+    return {
+        register : (registerUserData : Parameters) => userActions.register(registerUserData)(dispatch)
+    }
+}
+const connector = connect(mapStateToProps, mapDispatchToProps)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
+const UserRegisterFormContainer = (props : PropsFromRedux) => {
+    const [ user, setUser]  = useState<Parameters>({userName : "", password : "", submitted: false})
+
+    const handleOnInputChange = (parameters : keyValueType ) => {
+        setUser({...user, ...parameters})
+    }
+    const handleOnSubmit  = () => {
+        props.register({userName : user.userName, password : user.password, submitted : user.submitted})
     } 
     return (
         <UserRegisterFormRender 
-            userForm = {userForm}
-            setUser={setUser}
+            handleOnInputChange = {handleOnInputChange}
             handleOnSubmit={handleOnSubmit}
         />
     ) 
 }
-    
- 
+const ComponentConnected = connector(UserRegisterFormContainer)
+export {ComponentConnected as UserRegisterFormContainer}

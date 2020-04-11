@@ -4,10 +4,9 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 //Importando componentes básicos
 import { history } from '../../helpers'
 import { PrivateRoute } from '../../components/PrivateRoute'
-import { Home } from '../Home/Home'
+import { HomeContainer } from '../Home'
 import { LoginContainer }   from '../Login'
 import { UserRegisterFormContainer } from '../RegisterUser'
-
 
 const App = () => {
 
@@ -15,7 +14,7 @@ const App = () => {
     <React.Fragment>
       <Router history = {history}>
         <Switch>
-          <PrivateRoute exact path="/" component={Home} />
+          <PrivateRoute exact path="/" component={HomeContainer} />
           <Route exact path="/login" component={LoginContainer} /> 
           <Route exact path="/register" component={UserRegisterFormContainer} />
           <Redirect from ="*" to="/" />

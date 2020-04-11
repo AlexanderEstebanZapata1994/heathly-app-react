@@ -29,10 +29,10 @@ export const LoginIndexRender = ( props : any) => {
             <Container className={classes.root}>
                 <Grid container spacing={1}>
                     <Grid container direction="row-reverse" justify="center" alignItems="center" item xs={12}>
-                        <TextField name="userName" id="txtUsername" label="Type your username" onChange={onChange} value="aestebanz" />
+                        <TextField name="userName" id="txtUsername" label="Type your username" onChange={onChange} />
                     </Grid>
                     <Grid container direction="row-reverse" justify="center" alignItems="center" item xs={12}>
-                        <TextField name="password" id="txtPassword" type="password" label="Type your password" onChange={onChange} value="123" />
+                        <TextField name="password" id="txtPassword" type="password" label="Type your password" onChange={onChange}  />
                     </Grid>
                     <Grid container direction="row-reverse" justify="center" alignItems="center" item xs={12}>
                         <Button onClick={onSubmit} variant="contained" color="primary">Login</Button>
