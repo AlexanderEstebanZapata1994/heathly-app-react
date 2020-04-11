@@ -2,12 +2,9 @@ import React, {useState} from 'react';
 import { connect } from 'react-redux'
 
 
-import {UserRegisterFormRender} from './UserRegisterFormRender'
-import {IData} from './UserRegisterTypes'
+import {UserRegisterFormRender} from './UserRegisterRender'
+import {IData} from '../../Model'
 
-interface IProps {
-    
-}
 
 export const UserRegisterFormContainer = () => {
     const [ userForm, setUser]  = useState<IData>({user :{username : "", password : ""}, wasSubmitted: false})

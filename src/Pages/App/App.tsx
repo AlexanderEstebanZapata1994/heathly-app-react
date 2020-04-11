@@ -5,7 +5,7 @@ import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import { history } from '../../helpers'
 import { PrivateRoute } from '../../components/PrivateRoute'
 import { Home } from '../Home/Home'
-import { LoginIndexContainer }   from '../Login'
+import { LoginContainer }   from '../Login'
 import { UserRegisterFormContainer } from '../RegisterUser'
 
 
@@ -16,8 +16,8 @@ const App = () => {
       <Router history = {history}>
         <Switch>
           <PrivateRoute exact path="/" component={Home} />
-          <Route exact path="/login" component={LoginIndexContainer} /> {/* chambonada Tipado error */}
-          <Route exact path="/register" component={UserRegisterFormContainer} /> {/* chambonada Tipado error */}
+          <Route exact path="/login" component={LoginContainer} /> 
+          <Route exact path="/register" component={UserRegisterFormContainer} />
           <Redirect from ="*" to="/" />
         </Switch>
       </Router>

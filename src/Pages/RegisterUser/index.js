@@ -1,1 +1,1 @@
-export {UserRegisterFormContainer}  from './UserRegisterFormContainer' 
+export {UserRegisterFormContainer}  from './UserRegisterContainer' 

@@ -1,5 +1,5 @@
 import { userConstants } from '../constants';
-import { MessageAction } from '../../Model/Message.Actions.Model';
+import { MessageAction } from '../../Model';
 
 export function registration(state = {}, action : MessageAction) { //chambonada
   switch (action.type) {

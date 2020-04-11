@@ -1,5 +1,5 @@
 import { userConstants } from '../constants';
-import { UserActionType } from '../../Model/User.Actions.Model';
+import { UserActionType } from '../../Model';
 
 let user : string | null = localStorage.getItem('user');
 if (user != null) {
@@ -12,12 +12,12 @@ export function authentication(state = initialState, action : UserActionType) {
     case userConstants.LOGIN_REQUEST:
       return {
         loggingIn: true,
-        user: action.User
+        user: action.user
       };
     case userConstants.LOGIN_SUCCESS:
       return {
         loggedIn: true,
-        user: action.User
+        user: action.user
       };
     case userConstants.LOGIN_FAILURE:
       return {};

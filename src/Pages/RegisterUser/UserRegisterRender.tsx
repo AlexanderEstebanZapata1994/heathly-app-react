@@ -1,6 +1,6 @@
 import React,  {Fragment} from 'react';
 import { Link } from 'react-router-dom'
-import { IProps } from './UserRegisterTypes'
+import { IProps } from '../../Model'
 
 
 //Importamos componentes de material UI 

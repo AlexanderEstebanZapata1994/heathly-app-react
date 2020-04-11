@@ -1,7 +1,7 @@
 import { messagesConstants } from '../constants';
 import { MessageAction } from '../../Model/Message.Actions.Model'
 
-export function alert(state = {}, action : MessageAction) {
+export function message(state = {}, action : MessageAction) {
   switch (action.type) {
     case messagesConstants.SUCCESS:
       return {

@@ -1,1 +1,1 @@
-export {LoginIndexContainer} from './LoginIndexContainer'
+export {LoginContainer} from './LoginContainer'

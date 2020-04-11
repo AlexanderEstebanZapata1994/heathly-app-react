@@ -1,3 +1,13 @@
+import  { Parameters } from './User.Actions.Model';
+
+export type RegisterUserResponse = {
+    Status : boolean,
+    Response : string,
+    Message : string
+}
+
+export type InputParams = Parameters;
+
 export interface IData {
     user : {
         username : string,
