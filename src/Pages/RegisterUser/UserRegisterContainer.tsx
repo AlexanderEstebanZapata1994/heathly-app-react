@@ -1,20 +1,16 @@
 import React, {useState} from 'react';
 import { connect, ConnectedProps } from 'react-redux'
 import {userActions} from '../../GlobalState/Actions'
-import {ReduxRootState, Parameters, keyValueType, UserData} from '../../Model'
+import {ReduxRootState, Parameters, keyValueType} from '../../Model'
 
 //Importamos el componenete Dumb (Render)
 import {UserRegisterFormRender} from './UserRegisterRender'
 import { Dispatch } from 'redux';
 
 
-type  RootState = ReduxRootState
-
-const mapStateToProps = (state : RootState) => {
-    console.log(state)
-    return ({
+const mapStateToProps = (state : ReduxRootState) => ({
     userData : state.authentication.user
-})}
+})
 
 const mapDispatchToProps = (dispatch : Dispatch) => {
     return {
@@ -24,6 +20,7 @@ const mapDispatchToProps = (dispatch : Dispatch) => {
 const connector = connect(mapStateToProps, mapDispatchToProps)
 
 type PropsFromRedux = ConnectedProps<typeof connector>
+
 const UserRegisterFormContainer = (props : PropsFromRedux) => {
     const [ user, setUser]  = useState<Parameters>({userName : "", password : "", submitted: false})
 

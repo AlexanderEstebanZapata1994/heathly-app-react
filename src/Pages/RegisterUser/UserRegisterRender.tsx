@@ -7,10 +7,10 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import {Input, FormHelperText} from '@material-ui/core'
 import SaveIcon  from '@material-ui/icons/Save'
-import {useStyles} from './StyleUserRegisterForm'
+import {useStyles} from './UserRegisterStyle'
 
 //Importamos los componenetes necesarios
-import {NavBar} from '../../components/NavBar'
+import {NavBarContainer} from '../../components'
 
 export const UserRegisterFormRender = (props : any) =>{
     
@@ -30,7 +30,7 @@ export const UserRegisterFormRender = (props : any) =>{
     const classes = useStyles();
     return (
       <Fragment>
-        <NavBar title = {"Create new user"} />
+        <NavBarContainer title = {"Create new user"} />
         <Container fixed>
           <div className={classes.root}>
               <Grid container spacing={3}>

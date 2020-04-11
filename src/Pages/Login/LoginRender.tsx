@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-import { NavBar } from '../../components/NavBar';
+import { NavBarContainer } from '../../components';
 
 //Importamos componentes de material UI 
 import { Container, TextField, Button, Typography } from '@material-ui/core';
@@ -25,7 +25,7 @@ export const LoginIndexRender = ( props : any) => {
     }
     return (
         <React.Fragment>
-            <NavBar title={"Login"}></NavBar>
+            <NavBarContainer title={"Login"}/>
             <Container className={classes.root}>
                 <Grid container spacing={1}>
                     <Grid container direction="row-reverse" justify="center" alignItems="center" item xs={12}>

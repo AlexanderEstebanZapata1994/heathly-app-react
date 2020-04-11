@@ -1,12 +1,16 @@
 import React from 'react'
-import { NavBar } from '../../components/NavBar';
+import { NavBarContainer } from '../../components';
+
+//Import material UI
+import { useStyles } from './HomeStyle'
 
 export const HomeRender = (props : any) =>{
-
+    const classes = useStyles();
     return(
         <React.Fragment>
-            <NavBar title={"Home"}></NavBar>
-            <h1>Home</h1>
+            <NavBarContainer title ={`Bienvenido Dr ${props.title}`} />
+            <h1>Formulario</h1>
+            
         </React.Fragment>
     )
 }
