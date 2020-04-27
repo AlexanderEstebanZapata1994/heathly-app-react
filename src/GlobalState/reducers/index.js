@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 
-import { authentication } from './authentication.reducer';
-import { registration } from './registration.reducer';
-import { message } from './message.reducer';
+import { Authentication } from './authentication.reducer';
+import { Registration } from './registration.reducer';
+import { MessageAlert } from './message.reducer';
 
 const rootReducer = combineReducers({
-  authentication,
-  registration,
-  message
+  Authentication,
+  Registration,
+  MessageAlert,
 });
 
 export default rootReducer;

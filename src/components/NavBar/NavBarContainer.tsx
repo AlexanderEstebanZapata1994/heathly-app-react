@@ -8,7 +8,7 @@ interface IProps {
     title : string
 }
 const NavBarContainer = (props : IProps) => {
-    const IsLoggedIn = useSelector((state : ReduxRootState) => state.authentication.loggedIn)
+    const IsLoggedIn = useSelector((state : ReduxRootState) => state.Authentication?.isLoggedIn)
     return (
         <NavBarRender 
             title={props.title}

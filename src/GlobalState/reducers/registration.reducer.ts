@@ -1,14 +1,14 @@
 import { userConstants } from '../constants';
-import { MessageAction } from '../../Model';
+import { registration } from '../../Model';
 
-export function registration(state = {}, action : MessageAction) { //chambonada
+export function Registration(state : registration = {isSigningUp : false}, action : any) {
   switch (action.type) {
     case userConstants.REGISTER_REQUEST:
-      return { registering: true };
+      return { ...state, isSigningUp : action.payload };
     case userConstants.REGISTER_SUCCESS:
-      return {};
+      return { ...state, isSigningUp : action.payload };
     case userConstants.REGISTER_FAILURE:
-      return {};
+      return { ...state, isSigningUp : action.payload };
     default:
       return state
   }

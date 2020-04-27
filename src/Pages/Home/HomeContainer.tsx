@@ -5,11 +5,9 @@ import {ReduxRootState} from '../../Model'
 
 const HomeContainer = () =>{
 
-    const userName = useSelector((state : ReduxRootState) => state.authentication.user.UserName)
+    const userName = useSelector((state : ReduxRootState) => state.Authentication.User.Name + " " + state.Authentication.User.Surname)
     return (
-        <HomeRender title = {userName} >
-            
-        </HomeRender>
+        <HomeRender title = {userName} />
     )
 }
 

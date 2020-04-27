@@ -7,12 +7,12 @@ export const  messagesActions = {
 };
 
 
-function success(message : string) {
-    return { type: messagesConstants.SUCCESS, message };
+function success(payload : string) {
+    return { type: messagesConstants.SUCCESS, payload };
 }
 
-function error(message : string) {
-    return { type: messagesConstants.ERROR, message };
+function error(payload : string) {
+    return { type: messagesConstants.ERROR, payload };
 }
 
 function clear() {

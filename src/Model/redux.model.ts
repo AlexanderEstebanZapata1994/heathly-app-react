@@ -1,11 +1,23 @@
-import {UserData} from './User.Actions.Model'
-export type ReduxRootState = {
-    authentication :{
-        loggedIn : boolean,
-        user : UserData
-    },
-    registration : {
+import {UserResponse} from './User.Model'
+import { messageAlert } from './MessageAlert.Model'
 
-    },
-    message : {}
+export type ReduxRootState = {
+    Authentication : authentication,
+    Registration : registration,
+    MessagesAlert : messageAlert
+}
+
+export type UserReducerType = {
+    type : string,
+    payload : authentication | registration
+}
+
+export type authentication = {
+    isLoggedIn : boolean,
+    isLoggingIn : boolean,
+    User : UserResponse,
+}
+
+export type registration = {
+    isSigningUp : boolean,
 }

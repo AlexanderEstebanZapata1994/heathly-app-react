@@ -1,5 +1,5 @@
 // import { authHeader } from '../helpers'
-import { Parameters } from '../Model'
+import { UserRequest } from '../Model'
 import Axios from 'axios';
 
 export const userService = {
@@ -10,22 +10,18 @@ export const userService = {
     // getById,
 };
 
-function login(credentials : Parameters) {
+function login(credentials : UserRequest) {
     return Axios.post("https://localhost:44380/api/users/login", {...credentials})
         .then((response: any) => {
             let user  = {...response.data};
-            // store user details and jwt token in local storage to keep user logged in between page refreshes
-            localStorage.setItem('user', JSON.stringify(user));
             return user
         })
 }
 
-function register(credentials : Parameters) {
-    console.log("entre hastas")
+function register(credentials : UserRequest) {
     return Axios.post("https://localhost:44380/api/users/register", {...credentials} )
         .then((response : any) => {
             let result =  {...response.data};
-
             return result;
         });
 }

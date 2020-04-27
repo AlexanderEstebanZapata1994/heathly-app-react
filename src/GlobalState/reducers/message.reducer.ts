@@ -1,20 +1,28 @@
 import { messagesConstants } from '../constants';
-import { MessageAction } from '../../Model/Message.Actions.Model'
+import { messageAlert } from '../../Model/MessageAlert.Model'
 
-export function message(state = {}, action : MessageAction) {
+const initialState : messageAlert = {
+  type :"",
+  payload : ""
+}
+export function MessageAlert(state : messageAlert = initialState, action : messageAlert) {
   switch (action.type) {
     case messagesConstants.SUCCESS:
       return {
-        type: 'alert-success',
-        message: action.message
+        type: 'success',
+        message : action.payload
       };
     case messagesConstants.ERROR:
       return {
-        type: 'alert-danger',
-        message: action.message
+        type: 'error',
+        message : action.payload
       };
     case messagesConstants.CLEAR:
-      return {};
+      return {
+        ...state,
+        type : "",
+        payload : ""
+      };
     default:
       return state
   }

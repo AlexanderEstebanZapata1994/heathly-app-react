@@ -7,7 +7,7 @@ const store = createStore(
     AllReducers,
     composeWithDevTools(
         applyMiddleware(thunk)
-    // other store enhancers if any
+        // other store enhancers if any
     )
 );
 

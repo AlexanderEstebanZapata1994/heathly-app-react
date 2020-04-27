@@ -1,26 +1,45 @@
 import { userConstants } from '../constants';
-import { UserActionType } from '../../Model';
+import {authentication, UserReducerType, UserResponse} from '../../Model';
+
+let user2 : UserResponse = {UserId : 0, UserName : "", Name: "", Surname:"",Token :"", Error: {ErrorMessage:"", HasError : false}};
 
 let user : string | null = localStorage.getItem('user');
 if (user != null) {
-  user = JSON.parse(user);
+  user2 = JSON.parse(user);
 }
-const initialState = user ? { loggedIn: true, user } : {};
+const initialState : authentication = user2 
+  ? {
+      isLoggedIn : true,
+      isLoggingIn : false,
+      User : user2,
+    } 
+  : {
+      isLoggedIn : false,
+      isLoggingIn : false,
+      User : user2,
+    } ;
 
-export function authentication(state = initialState, action : UserActionType) {
+export function Authentication(state : authentication = initialState, action : UserReducerType) {
   switch (action.type) {
     case userConstants.LOGIN_REQUEST:
       return {
-        loggingIn: true,
-        user: action.user
+        ...state, 
+        isLoggingIn : action.payload
       };
     case userConstants.LOGIN_SUCCESS:
       return {
-        loggedIn: true,
-        user: action.user
+        ...state,
+        isLoggedIn : true,
+        isLoggingIn : false,
+        User : action.payload
       };
     case userConstants.LOGIN_FAILURE:
-      return {};
+      return {
+        ...state,
+        isLoggedIn : false,
+        isLoggingIn : false,
+        User : action.payload
+      };
     case userConstants.LOGOUT:
       return {};
     default:

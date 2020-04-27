@@ -3,45 +3,49 @@ import {LoginIndexRender} from './LoginRender'
 import {Dispatch} from 'redux'
 
 //We import the materials to work with Redux
-import { connect } from 'react-redux';
-import { userActions } from '../../GlobalState/Actions'
-import { Parameters } from '../../Model'
- 
+import { connect, ConnectedProps} from 'react-redux'
+import { userActions } from '../../GlobalState/actions'
+import { UserRequest, ReduxRootState, keyValueType} from '../../Model'
 
-export interface ILoginProps {
-  iLogin: any//(inputParams: Parameters) => (dispatch: Dispatch) => void
+const mapStateToProps = (state : ReduxRootState) => (
+  {
+    Error : state.Authentication.User.Error
+  }
+)
+
+//Relacionamos la acción con las props
+const mapDispatchToProps = (dispatch : Dispatch) =>{
+  return {
+    iLogin: (params : UserRequest) => userActions.logIn(params)(dispatch)
+  }
 }
 
-type keyValueType = {
-  [key : string] : string
-}
+const connector = connect(mapStateToProps, mapDispatchToProps)
+
+type PropsFromRedux = ConnectedProps<typeof connector>
 
 //Login Smart Component
-const LoginContainer = (props : ILoginProps)   =>{
-  const [loginParams, setLoginParams] = useState<Parameters>({userName : "", password : "", submitted : false})
+const LoginContainer = (props : PropsFromRedux)   =>{
+  const [loginParams, setLoginParams] = useState<UserRequest>({UserName : "", Password : ""})
 
   const handleOnInputChange = ( param : keyValueType) => {  
       setLoginParams({...loginParams, ...param});
   }
 
   const handleOnFormSubmit =  () =>{
-    props.iLogin( {userName :loginParams.userName, password: loginParams.password, submitted : loginParams.submitted} );
+    props.iLogin( {UserName :loginParams.UserName, Password: loginParams.Password} );
   } 
   return (
-    <LoginIndexRender
+    <React.Fragment>
+      <LoginIndexRender
       handleOnInputChange = {handleOnInputChange}
       handleOnFormSubmit = {handleOnFormSubmit}
-    />
+      isError = {props.Error.HasError}
+      message = {props.Error.ErrorMessage}
+      />
+    </React.Fragment>
   );
 }
 
-//Relacionamos la acción con las props
-const mapDispatchToProps = (dispatch : Dispatch) =>{
-  return {
-    iLogin: (params : Parameters) => userActions.login(params)(dispatch)
-  }
-}
-
-//Utilizamos el HOC connect con el componente Login
-const connectedLogin = connect(null, mapDispatchToProps)(LoginContainer)
-export {connectedLogin as LoginContainer}
+const ComponentConnected = connector(LoginContainer)
+export {ComponentConnected as LoginContainer}

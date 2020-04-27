@@ -1,28 +1,28 @@
 import { userConstants } from '../constants'
 import { userService } from '../../Services'
-import { messagesActions } from '.'
+import { messagesActions } from './messages.actions'
 import { history } from '../../helpers'
-import { Parameters, UserData, RegisterUserResponse } from '../../Model'
+import { UserRequest, UserResponse } from '../../Model'
 import { Dispatch } from 'redux';
 
 export const userActions = {
-  login,
-  //logout,
+  logIn,
   register,
-  //getAll,
+  //logout,
 };
 
-function login(inputParams: Parameters) {
-
+function logIn(inputParams: UserRequest) {
   return (dispatch: Dispatch) => {
-
-    dispatch(request(inputParams));
+    dispatch(request(true));
     userService.login(inputParams).then(
-      user => {
+      (user : UserResponse) => {
         if(user.Error.HasError){
-          dispatch(failure(user.Error.ErrorMessage));
           dispatch(messagesActions.error(user.Error.ErrorMessage));
+          dispatch(failure(user));
         }else{
+          // store user details and jwt token in local storage to keep user logged in between page refreshes
+          localStorage.setItem('user', JSON.stringify(user));
+          dispatch(messagesActions.success("Login success"));
           dispatch(success(user));
           history.push("/");
         }
@@ -34,42 +34,42 @@ function login(inputParams: Parameters) {
     );
   };
 
-  function request(credentials: Parameters) {
-    return { type: userConstants.LOGIN_REQUEST, credentials };
+  function request(payload: boolean) {
+    return { type: userConstants.LOGIN_REQUEST, payload };
   }
-  function success(user: UserData) {
-    return { type: userConstants.LOGIN_SUCCESS, user };
+  function success(payload: UserResponse) {
+    return { type: userConstants.LOGIN_SUCCESS, payload };
   }
-  function failure(error: string) {
-    return { type: userConstants.LOGIN_FAILURE, error };
+  function failure(payload : UserResponse) {
+    return { type: userConstants.LOGIN_FAILURE, payload };
   }
 }
 
 
-function register(user: Parameters) {
+function register(user: UserRequest) {
   return (dispatch: Dispatch) => {
-    dispatch(request(user));
+    dispatch(request(true));
 
     userService.register(user).then(
-      user => {
-        dispatch(success(user));
+      (user )  => {
+        dispatch(success(false));
         history.push("/login");
         dispatch(messagesActions.success("Registration successful"));
       },
       error => {
-        dispatch(failure(error));
+        dispatch(failure(false));
         dispatch(messagesActions.error(error));
       }
     );
   };
 
-  function request(credentials: Parameters) {
-    return { type: userConstants.REGISTER_REQUEST, credentials };
+  function request(payload : boolean) {
+    return { type: userConstants.REGISTER_REQUEST, payload };
   }
-  function success(user: RegisterUserResponse) {
-    return { type: userConstants.REGISTER_SUCCESS, user  };
+  function success(payload : boolean) {
+    return { type: userConstants.REGISTER_SUCCESS, payload  };
   }
-  function failure(error: string) {
-    return { type: userConstants.REGISTER_FAILURE, error };
+  function failure(payload: boolean) {
+    return { type: userConstants.REGISTER_FAILURE, payload };
   }
 }
