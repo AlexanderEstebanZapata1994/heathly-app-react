@@ -1,4 +1,3 @@
-// import { authHeader } from '../helpers'
 import { UserRequest } from '../Model'
 import Axios from 'axios';
 
@@ -6,8 +5,6 @@ export const userService = {
     login,
     logout,
     register,
-    // getAll,
-    // getById,
 };
 
 function login(credentials : UserRequest) {

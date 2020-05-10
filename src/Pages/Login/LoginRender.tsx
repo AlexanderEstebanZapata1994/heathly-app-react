@@ -35,7 +35,7 @@ export const LoginIndexRender = ( props : IProps) => {
             <Container className={classes.root}>
             {isError ? <Alert severity="error">
                 <AlertTitle>Error</AlertTitle>
-                — <strong>{message}</strong>
+                <strong>{message}</strong>
             </Alert> : null}
                 <Grid container spacing={1}>
                     <Grid container direction="row-reverse" justify="center" alignItems="center" item xs={12}>

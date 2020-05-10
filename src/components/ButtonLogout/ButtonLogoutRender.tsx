@@ -8,7 +8,7 @@ const ButtonLogoutRender = () => {
     const classes = useStyles();
     return (
         <div className= {classes.root} >
-            <Fab variant="extended" style= {{marginRight: "5px", marginTop:"5px"}} className = {classes.positionFabButton} color="secondary"><LogoutIcon className = {classes.extendedIcon}/>Logout</Fab>
+            <Fab variant="extended" style= {{marginRight: "5px", marginTop:"5px"}} className = {classes.positionFabButton} color="secondary"><LogoutIcon /></Fab>
         </div>
     )
 }

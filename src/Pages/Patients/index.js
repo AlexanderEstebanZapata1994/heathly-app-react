@@ -1,0 +1,1 @@
+export {PatientCardRender} from './PatientCardRender'

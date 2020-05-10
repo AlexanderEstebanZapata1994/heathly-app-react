@@ -12,8 +12,5 @@ export const useStyles = makeStyles((theme : Theme) =>
         },
         flexGrow: 1,
     },
-    extendedIcon : {
-        marginRight : theme.spacing(1),
-    }
   })
 );
