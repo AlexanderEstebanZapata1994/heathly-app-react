@@ -1,6 +1,5 @@
 import React,  {Fragment} from 'react';
-import {IData, IProps} from './UserRegisterTypes'
-
+import { Link } from 'react-router-dom'
 
 //Importamos componentes de material UI 
 import Container from '@material-ui/core/Container';
@@ -8,26 +7,30 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import {Input, FormHelperText} from '@material-ui/core'
 import SaveIcon  from '@material-ui/icons/Save'
-import {useStyles} from './StyleUserRegisterForm'
+import {useStyles} from './UserRegisterStyle'
 
 //Importamos los componenetes necesarios
-import {NavBar} from '../../components/NavBar'
+import {NavBarContainer} from '../../components'
 
-type handleOnChangeInputType = (event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => void
+export const UserRegisterFormRender = (props : any) =>{
+    
+  const onChange = (event : React.ChangeEvent<HTMLInputElement>) => {
+    let name = event.target.name;
+    let value = event.target.value;
 
-export const UserRegisterFormRender : React.FC<IProps> = (props) =>{
-    const {userForm, setUser, handleOnSubmit} : IProps = props
+    props.handleOnInputChange({ [name]: value });
+  }
 
-    const handleOnChangeInput : handleOnChangeInputType =  (event : React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) =>{ 
-      const name = event.target.name
-      const value = event.target.value
-      setUser({...userForm, [name] : value})
-    }
+  const onSubmit = (event : React.MouseEvent<HTMLButtonElement>)=> {
+    event.preventDefault();
+    props.handleOnSubmit();
+    props.handleOnInputChange({submitted : true})
+  }
 
     const classes = useStyles();
     return (
       <Fragment>
-        <NavBar title = {"Create new user"} />
+        <NavBarContainer title = {"Create new user"} />
         <Container fixed>
           <div className={classes.root}>
               <Grid container spacing={3}>
@@ -37,11 +40,11 @@ export const UserRegisterFormRender : React.FC<IProps> = (props) =>{
               </Grid>
               <Grid container spacing={3}>
                 <Grid item md={12} sm={12} xs={12} >
-                  <Input placeholder="Username"  name="username" aria-describedby="usernameHelperText" onChange= {(e) => handleOnChangeInput(e)}/>
+                  <Input placeholder="Username"  name="userName" aria-describedby="usernameHelperText" onChange= {onChange}/>
                   <FormHelperText id="usernameHelperText">Type a unique username</FormHelperText>
                 </Grid>
                 <Grid item md={12} sm={12} xs={12}>
-                  <Input placeholder="Password" name="password" aria-describedby="usernameHelperText" type="password" onChange= {(e) => handleOnChangeInput(e)}/>
+                  <Input placeholder="Password" name="password" aria-describedby="usernameHelperText" type="password" onChange= {onChange}/>
                   <FormHelperText id="usernameHelperText">Type a secure password</FormHelperText>
                 </Grid>
                 <Grid item md={12} sm={6} xs={12}>
@@ -51,11 +54,11 @@ export const UserRegisterFormRender : React.FC<IProps> = (props) =>{
                     size="large"
                     className={classes.button}
                     startIcon={<SaveIcon />}
-                    onClick={handleOnSubmit}
+                    onClick={onSubmit}
                   >Save information</Button>
                 </Grid>
                 <Grid item md={12} sm={6} xs={12}>
-                  <Button color="secondary" href="/Login">Back to Login form</Button>
+                  <Link to="/login"><Button color="secondary" >Cancel</Button></Link>
                 </Grid>
               </Grid>
           </div>

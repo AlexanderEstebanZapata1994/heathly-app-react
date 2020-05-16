@@ -1,13 +1,13 @@
 import React from 'react';
-import { render as Render} from 'react-dom';
+import { render } from 'react-dom';
 import { Provider } from 'react-redux'
 
-import { store } from './GlobalState/store'
-import {App} from './Pages/App';
+import store from './GlobalState/store/store'
+import {App} from './Pages/App/App';
 
-Render(
+render(
     <Provider store = {store}>
         <App />
-    </Provider>
-    , document.getElementById('root')
+    </Provider>, 
+    document.getElementById('root')
 );

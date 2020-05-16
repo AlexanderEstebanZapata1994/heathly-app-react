@@ -1,0 +1,6 @@
+export * from './Redux.Model'
+export * from './GenericTypes'
+export * from './User.Model'
+export * from './MessageAlert.Model'
+export * from './Patient.Model'
+export {InputParams} from './Register.Model'
