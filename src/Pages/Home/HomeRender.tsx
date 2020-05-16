@@ -1,16 +1,21 @@
 import React  from 'react'
 import { NavBarContainer } from '../../components';
-import {PatientCardRender} from '../Patients'
+import { PatientResponse } from '../../Model'
 
 //Import material UI
 import { useStyles } from './HomeStyle'
+import {PatientCardRender} from '../Patients'
 import Container from '@material-ui/core/Container'
 import Grid from '@material-ui/core/Grid'
-
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
-export const HomeRender = (props : any) =>{
+interface iProps{
+    title : string,
+    patientList : PatientResponse[]
+}
+
+export const HomeRender = ({title, patientList} : iProps) =>{
 
     const topPatientsNames = [
     { title: 'The Shawshank Redemption', year: 1994 },
@@ -115,10 +120,11 @@ export const HomeRender = (props : any) =>{
     { title: 'Monty Python and the Holy Grail', year: 1975 },
     ];
     const classes = useStyles();
-    
+    // const list = Array.prototype.slice.call(patientList);
+    console.log(patientList);
     return(
         <React.Fragment>
-            <NavBarContainer title ={`Bienvenido Dr ${props.title}`} />
+            <NavBarContainer title ={`Bienvenido Dr ${title}`} />
             <Container className={classes.root}>
                 <Grid container spacing= {3}>
                     <Grid container justify="center" alignContent="center" item md={12}>
@@ -130,7 +136,13 @@ export const HomeRender = (props : any) =>{
                             renderInput={(params) => <TextField {...params} label="Filter patient by Name" variant="outlined" />}
                         />
                     </Grid>
-                    <PatientCardRender/>
+                    {
+                        patientList.map((element) => {
+                            return <PatientCardRender
+                                patientData = {element}
+                            ></PatientCardRender>
+                        })
+                    }
                 </Grid>
             </Container>
         </React.Fragment>

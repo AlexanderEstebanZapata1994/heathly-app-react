@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import { PatientResponse} from '../../Model'
 
 //Import the required material UI
 import {useStyles} from './PatientCardStyle'
@@ -17,11 +18,12 @@ import FavoriteIcon from '@material-ui/icons/Favorite'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 
-interface IProps {
-
+interface iProps {
+    patientData : PatientResponse,
 }
-const PatientCardRender = () =>{
+const PatientCardRender = ({patientData} : iProps) =>{
 
+    const initials = getInitialsName(patientData.Name, patientData.Surname)
     const classes = useStyles();
     const [expanded, setExpanded] = useState<boolean>(false)
 
@@ -34,7 +36,7 @@ const PatientCardRender = () =>{
                 <CardHeader 
                     avatar= {
                         <Avatar arial-label="recipe" className={classes.avatar}>
-                            AZ
+                            {initials}
                         </Avatar>
                     }
                     action = {
@@ -42,17 +44,17 @@ const PatientCardRender = () =>{
                             <MoreVertIcon />
                         </IconButton>
                     } 
-                    title="Alexander Esteban"
-                    subheader="Last visit: December 10, 1994"
+                    title={`${patientData.Name} ${patientData.Surname}`}
+                    subheader={`Born date: ${patientData.Birthdate? patientData.Birthdate :'N/A'}`}
                 />
                 <CardMedia
                     className={classes.media}
-                    image="https://www.verywellhealth.com/thmb/R9UnM-wpoXOWrRMO0WvdafI2CEU=/500x350/filters:no_upscale():max_bytes(150000):strip_icc()/GettyImages-493216537-56a3aa635f9b58b7d0d31ac5.jpg"
-                    title="Profile picture of Alexander Esteban"
+                    image={patientData.ProfilePicturePath}
+                    title={`Profile picture of ${patientData.Name}`}
                 />
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
-                    After providing diagnoses, doctors treat patients who are suffering from diseases and injuries. Doctors are also called physicians and they can be either medical doctors (M.D.) or doctors of osteopathic medicine
+                    {patientData.MedicalDescription}
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
@@ -102,4 +104,9 @@ const PatientCardRender = () =>{
     )
 }
 
+function getInitialsName (name : string, surname : string){
+    let initialName = name.substr(0,1)
+    let initialSurname = surname.substr(0,1)
+    return initialName + initialSurname
+} 
 export {PatientCardRender}

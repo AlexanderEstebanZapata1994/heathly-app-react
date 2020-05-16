@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import {LoginIndexRender} from './LoginRender'
-import {Dispatch} from 'redux'
+
 
 //We import the materials to work with Redux
 import { connect, ConnectedProps} from 'react-redux'
 import { userActions } from '../../GlobalState/actions'
 import { UserRequest, ReduxRootState, keyValueType} from '../../Model'
+import { Dispatch } from 'redux'
 
 const mapStateToProps = (state : ReduxRootState) => (
   {
@@ -25,7 +26,7 @@ const connector = connect(mapStateToProps, mapDispatchToProps)
 type PropsFromRedux = ConnectedProps<typeof connector>
 
 //Login Smart Component
-const LoginContainer = (props : PropsFromRedux)   =>{
+const LoginContainer = (props : PropsFromRedux)  => {
   const [loginParams, setLoginParams] = useState<UserRequest>({UserName : "", Password : ""})
 
   const handleOnInputChange = ( param : keyValueType) => {  
