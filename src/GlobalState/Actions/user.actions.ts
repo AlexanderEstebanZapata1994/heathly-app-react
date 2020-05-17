@@ -1,6 +1,6 @@
 import { userConstants } from '../constants'
 import { userService } from '../../Services'
-import { messagesActions } from './messages.actions'
+import { messagesActions } from './messages.actions.ts'
 import { history } from '../../helpers'
 import { UserRequest, UserResponse } from '../../Model'
 import { Dispatch } from 'redux';

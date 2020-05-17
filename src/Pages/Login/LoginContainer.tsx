@@ -4,7 +4,7 @@ import {LoginIndexRender} from './LoginRender'
 
 //We import the materials to work with Redux
 import { connect, ConnectedProps} from 'react-redux'
-import { userActions } from '../../GlobalState/actions'
+import { userActions } from '../../GlobalState/actions/user.actions'
 import { UserRequest, ReduxRootState, keyValueType} from '../../Model'
 import { Dispatch } from 'redux'
 

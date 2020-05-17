@@ -1,3 +1,3 @@
-export * from './messages.actions';
-export * from './user.actions';
-export * from './patients.actions'
+export * from './messages.actions.ts';
+export * from './user.actions.ts';
+export * from './patients.actions.ts';

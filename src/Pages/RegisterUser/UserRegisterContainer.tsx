@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { connect, ConnectedProps } from 'react-redux'
-import {userActions} from '../../GlobalState/actions'
+import {userActions} from '../../GlobalState/actions/user.actions'
 import {ReduxRootState, UserRequest, keyValueType} from '../../Model'
 
 //Importamos el componenete Dumb (Render)

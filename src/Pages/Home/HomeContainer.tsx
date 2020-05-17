@@ -4,7 +4,7 @@ import { HomeRender } from './HomeRender'
 
 // We import the materials to work with redux
 import { Dispatch } from 'redux'
-import { patientActions } from '../../GlobalState/actions'
+import { patientActions } from '../../GlobalState/Actions/patients.actions'
 import { useSelector, ConnectedProps, connect } from 'react-redux'
 import { ReduxRootState } from '../../Model'
 
